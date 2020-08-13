@@ -144,7 +144,7 @@ class Lambdasian {
 
 const myInfo = {
   name: "Richard",
-  age: 30,
+  age: 31,
   location: "Miami",
 };
 
@@ -221,8 +221,41 @@ class Student extends Lambdasian {
 
     this.previousBackground = studentData.previousBackground;
     this.className = studentData.className;
+    this.favSubjects = studentData.favSubjects;
+  }
+
+  listSubjects() {
+    let allSubjects = this.favSubjects.map((item) => {
+      return `${item}`;
+    });
+
+    return `Loving ${allSubjects}!`;
+  }
+
+  PRAssignment(subject) {
+    return `${this.name} has submitted a PR for ${subject}`;
+  }
+
+  sprintChallenge(subject) {
+    return `${this.name} has begun sprint challenge ${subject}`;
   }
 }
+
+// Test Class
+const studentInfo = {
+  name: "Richard",
+  age: 31,
+  location: "Miami",
+  previousBackground: "Freelancer",
+  className: "WebPT21",
+  favSubjects: ["JavaScript, HTML, CSS, React"],
+};
+
+const lambdaStudent = new Student(studentInfo);
+console.log(lambdaStudent);
+console.log(lambdaStudent.listSubjects());
+console.log(lambdaStudent.PRAssignment("JavaScript"));
+console.log(lambdaStudent.sprintChallenge("React"));
 
 /*
   TASK 6
@@ -237,7 +270,22 @@ class Student extends Lambdasian {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {}
+class ProjectManager extends Instructor {
+  constructor(managerData) {
+    super(managerData);
+
+    this.gradClassName = managerData.gradClassName;
+    this.favInstructor = managerData.favInstructor;
+  }
+
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+
+  debugsCode(student, subject) {
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
+}
 
 /*
   STRETCH PROBLEM (no tests!)
