@@ -296,6 +296,43 @@ class ProjectManager extends Instructor {
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
 
+class Graduate extends Student {
+  constructor(gradeData) {
+    super(gradeData);
+
+    this.grade = gradeData.grade;
+  }
+
+  graduate() {
+    if (this.grade >= 70) {
+      return `${this.name} is able to graduate`;
+    } else {
+      return `${this.name} is NOT able to graduate`;
+    }
+  }
+}
+
+Instructor.prototype.randomSubtractAdd = function (grade, points) {
+  const randomNum = Math.floor(Math.random() * 2) + 1;
+  let newGrade;
+
+  if (randomNum === 1) {
+    newGrade = grade < 0 ? 0 : grade - points;
+    newGrade = newGrade < 0 ? 0 : newGrade;
+  } else {
+    newGrade = grade > 100 ? 100 : grade + points;
+    newGrade = newGrade > 100 ? 100 : newGrade;
+  }
+
+  return newGrade;
+};
+
+// Test the new added class and prototype
+studentInfo.grade = lambdaInstructor.randomSubtractAdd(50, 20);
+const graduateProspect = new Graduate(studentInfo);
+
+console.log(graduateProspect.graduate());
+
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
